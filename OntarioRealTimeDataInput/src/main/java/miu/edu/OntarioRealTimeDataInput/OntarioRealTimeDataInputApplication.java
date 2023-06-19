@@ -12,7 +12,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableConfigurationProperties(ApplicationProperties.class)
 public class OntarioRealTimeDataInputApplication {
+
 	public static void main(String[] args) {
 		SpringApplication.run(OntarioRealTimeDataInputApplication.class, args);
 	}
+
 }

@@ -25,7 +25,7 @@ public class RealTimeDataInputService {
         HttpEntity<String> entity = new HttpEntity<String>(headers);
         String answer = restTemplate.getForObject(url, String.class, entity);
         System.out.println(answer);
-//        published data to stream using KafkaProducer
+        //published data to stream using KafkaProducer
         kafkaProducer.sendMessage(answer);
     }
 }

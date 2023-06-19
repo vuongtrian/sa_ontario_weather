@@ -20,12 +20,13 @@ import static org.apache.kafka.streams.StreamsConfig.*;
 @Configuration
 @EnableKafka
 @EnableKafkaStreams
-public class KafkaConfig {
+public class KafkaTopicConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
     @Autowired
     private ApplicationProperties applicationProperties;
+
     @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
     KafkaStreamsConfiguration kStreamsConfig() {
         System.out.println(applicationProperties.getApplicationId());
