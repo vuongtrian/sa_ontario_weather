@@ -1,4 +1,4 @@
-package miu.edu.OntarioRealTimeDataInput;
+package miu.edu.OntarioRealTimeDataInput.service;
 
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;

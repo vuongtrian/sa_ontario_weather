@@ -1,6 +1,5 @@
-package miu.edu.OntarioRealTimeDataInput;
+package miu.edu.OntarioRealTimeDataInput.service;
 
-import miu.edu.OntarioRealTimeDataInput.ApplicationProperties;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.serialization.Serdes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +28,9 @@ public class KafkaConfig {
     private ApplicationProperties applicationProperties;
     @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
     KafkaStreamsConfiguration kStreamsConfig() {
+        System.out.println(applicationProperties.getApplicationId());
         Map<String, Object> props = new HashMap<>();
-        props.put(APPLICATION_ID_CONFIG, "streams-app");
+        props.put(APPLICATION_ID_CONFIG, applicationProperties.getApplicationId());
         props.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
         props.put(DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());

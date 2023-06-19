@@ -1,4 +1,4 @@
-package miu.edu.OntarioRealTimeDataInput;
+package miu.edu.OntarioRealTimeDataInput.service;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

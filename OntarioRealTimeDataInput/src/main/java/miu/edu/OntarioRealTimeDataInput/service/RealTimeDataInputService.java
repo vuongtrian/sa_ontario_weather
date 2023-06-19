@@ -12,8 +12,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class RealTimeDataInputService {
 
-//    @Autowired
-//    private KafkaProducer kafkaProducer;
+    @Autowired
+    private KafkaProducer kafkaProducer;
 
     @Scheduled(fixedDelay = 10000)
     public void getData() {
@@ -25,7 +25,7 @@ public class RealTimeDataInputService {
         HttpEntity<String> entity = new HttpEntity<String>(headers);
         String answer = restTemplate.getForObject(url, String.class, entity);
         System.out.println(answer);
-        //published data to stream using KafkaProducer
-//        kafkaProducer.sendMessage(answer);
+//        published data to stream using KafkaProducer
+        kafkaProducer.sendMessage(answer);
     }
 }
