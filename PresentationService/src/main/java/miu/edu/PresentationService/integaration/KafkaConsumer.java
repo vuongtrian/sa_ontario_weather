@@ -1,11 +1,11 @@
 package miu.edu.PresentationService.integaration;
 
-import miu.edu.PresentationService.dao.OntarioWeatherRepository;
-import miu.edu.PresentationService.domain.OntarioWeather;
-import miu.edu.PresentationService.domain.OntarioWeatherData;
+import miu.edu.PresentationService.dao.OntarioEnergyRepository;
+import miu.edu.PresentationService.domain.OntarioEnergy;
+import miu.edu.PresentationService.domain.OntarioEnergyData;
 import miu.edu.PresentationService.service.ConvertStringToObject;
-import miu.edu.PresentationService.service.OntarioWeatherAdapter;
-import miu.edu.PresentationService.service.OntarioWeatherDTO;
+import miu.edu.PresentationService.service.OntarioEnergyAdapter;
+import miu.edu.PresentationService.service.OntarioEnergyDTO;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class KafkaConsumer {
     private String groupId;
 
     @Autowired
-    private OntarioWeatherRepository repository;
+    private OntarioEnergyRepository repository;
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
@@ -64,10 +64,10 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "filtered-data")
     public void listenGroupFoo(String message) {
-        System.out.println("Received Message from Kafka stream: " + message);
-        OntarioWeatherDTO ontarioWeatherDTO = ConvertStringToObject.covertFromJsonToOntario(message);
-        OntarioWeather ontarioWeather = OntarioWeatherAdapter.convertFromDtoToOntarioWeather(ontarioWeatherDTO);
-        OntarioWeatherData data = new OntarioWeatherData(new Date(), ontarioWeather);
+        System.out.println("Received Message from ripper service: " + message);
+        OntarioEnergyDTO ontarioWeatherDTO = ConvertStringToObject.covertFromJsonToOntario(message);
+        OntarioEnergy ontarioWeather = OntarioEnergyAdapter.convertFromDtoToOntarioWeather(ontarioWeatherDTO);
+        OntarioEnergyData data = new OntarioEnergyData(new Date(), ontarioWeather);
         repository.save(data);
     }
 }

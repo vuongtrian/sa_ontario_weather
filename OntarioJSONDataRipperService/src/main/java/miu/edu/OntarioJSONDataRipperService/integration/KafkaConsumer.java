@@ -1,6 +1,6 @@
 package miu.edu.OntarioJSONDataRipperService.integration;
 
-import miu.edu.OntarioJSONDataRipperService.domain.OntarioWeather;
+import miu.edu.OntarioJSONDataRipperService.domain.OntarioEnergy;
 import miu.edu.OntarioJSONDataRipperService.service.ConvertObjectToString;
 import miu.edu.OntarioJSONDataRipperService.service.ConvertStringToObject;
 import miu.edu.OntarioJSONDataRipperService.service.Sender;
@@ -62,9 +62,9 @@ public class KafkaConsumer {
     @KafkaListener(topics = "stream-output")
     public void listenGroupFoo(String message) {
         System.out.println("Received Message from Kafka stream: " + message);
-        OntarioWeather ontarioWeather = ConvertStringToObject.covertFromJsonToOntario(message);
+        OntarioEnergy ontarioWeather = ConvertStringToObject.covertFromJsonToOntario(message);
         String ontarioWeatherString = ConvertObjectToString.convertFromOntarioWeatherToString(ontarioWeather);
-        System.out.println("Received convert object: " + ontarioWeatherString);
+        System.out.println("Sending convert object: " + ontarioWeatherString);
         sender.send("filtered-data", ontarioWeatherString);
     }
 }

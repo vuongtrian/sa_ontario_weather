@@ -1,21 +1,19 @@
 package miu.edu.PresentationService.domain;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Document
-public class OntarioWeatherData {
+public class OntarioEnergyData {
 
     private Date date;
-    private OntarioWeather ontarioWeather;
+    private OntarioEnergy ontarioWeather;
 
-    public OntarioWeatherData() {
+    public OntarioEnergyData() {
     }
 
-    public OntarioWeatherData(Date date, OntarioWeather ontarioWeather) {
+    public OntarioEnergyData(Date date, OntarioEnergy ontarioWeather) {
         this.date = date;
         this.ontarioWeather = ontarioWeather;
     }
@@ -28,11 +26,11 @@ public class OntarioWeatherData {
         this.date = date;
     }
 
-    public OntarioWeather getOntarioWeather() {
+    public OntarioEnergy getOntarioWeather() {
         return ontarioWeather;
     }
 
-    public void setOntarioWeather(OntarioWeather ontarioWeather) {
+    public void setOntarioWeather(OntarioEnergy ontarioWeather) {
         this.ontarioWeather = ontarioWeather;
     }
 
