@@ -1,7 +1,14 @@
 package miu.edu.OntarioJSONDataRipperService.integration;
 
+import com.google.gson.Gson;
+import miu.edu.OntarioJSONDataRipperService.domain.OntarioWeather;
+import miu.edu.OntarioJSONDataRipperService.service.ConvertObjectToString;
+import miu.edu.OntarioJSONDataRipperService.service.ConvertStringToObject;
+import miu.edu.OntarioJSONDataRipperService.service.Sender;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -16,15 +23,25 @@ import java.util.Map;
 @EnableKafka
 @Configuration
 public class KafkaConsumerStreamOutput {
+
+    @Value(value = "${spring.kafka.bootstrap-servers}")
+    private String bootstrapAddress;
+
+    @Value(value = "${spring.kafka.consumer.auto-offset-reset.group-id}")
+    private String groupId;
+
+    @Autowired
+    private Sender sender;
+
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "http://localhost:9092");
+                bootstrapAddress);
         props.put(
                 ConsumerConfig.GROUP_ID_CONFIG,
-                "kafka-stream");
+                groupId);
         props.put(
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 StringDeserializer.class);
@@ -35,8 +52,7 @@ public class KafkaConsumerStreamOutput {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String>
-    kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
 
         ConcurrentKafkaListenerContainerFactory<String, String> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
@@ -47,5 +63,9 @@ public class KafkaConsumerStreamOutput {
     @KafkaListener(topics = "stream-output")
     public void listenGroupFoo(String message) {
         System.out.println("Received Message from Kafka stream: " + message);
+        OntarioWeather ontarioWeather = ConvertStringToObject.covertFromJsonToOntario(message);
+        String ontarioWeatherString = ConvertObjectToString.convertFromOntarioWeatherToString(ontarioWeather);
+        System.out.println("Received convert object: " + ontarioWeatherString);
+        sender.send("raw-data", ontarioWeatherString);
     }
 }
