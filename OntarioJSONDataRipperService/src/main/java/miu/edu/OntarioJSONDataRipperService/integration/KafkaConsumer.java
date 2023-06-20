@@ -1,6 +1,5 @@
 package miu.edu.OntarioJSONDataRipperService.integration;
 
-import com.google.gson.Gson;
 import miu.edu.OntarioJSONDataRipperService.domain.OntarioWeather;
 import miu.edu.OntarioJSONDataRipperService.service.ConvertObjectToString;
 import miu.edu.OntarioJSONDataRipperService.service.ConvertStringToObject;
@@ -22,7 +21,7 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
-public class KafkaConsumerStreamOutput {
+public class KafkaConsumer {
 
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
@@ -66,6 +65,6 @@ public class KafkaConsumerStreamOutput {
         OntarioWeather ontarioWeather = ConvertStringToObject.covertFromJsonToOntario(message);
         String ontarioWeatherString = ConvertObjectToString.convertFromOntarioWeatherToString(ontarioWeather);
         System.out.println("Received convert object: " + ontarioWeatherString);
-        sender.send("raw-data", ontarioWeatherString);
+        sender.send("filtered-data", ontarioWeatherString);
     }
 }
