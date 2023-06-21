@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
@@ -16,18 +17,19 @@ import org.supercsv.prefs.CsvPreference;
 import java.io.IOException;
 
 @RestController
+@RequestMapping("api/ontario-energy")
 public class OntarioEnergyController {
 
     @Autowired
     private IOntarioEnergyService service;
 
-    @GetMapping("/api/ontario-energy")
+    @GetMapping("")
     public ResponseEntity<?> findAll () {
         Data data = new Data(service.findTop2());
         return new ResponseEntity<Data>(data, HttpStatus.OK);
     }
 
-    @GetMapping("/api/export")
+    @GetMapping("/export")
     public void exportToCSV (HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         String fileName = "ontario-energy.csv";
