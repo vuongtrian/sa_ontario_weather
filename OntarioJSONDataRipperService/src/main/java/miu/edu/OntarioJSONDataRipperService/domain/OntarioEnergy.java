@@ -1,5 +1,7 @@
 package miu.edu.OntarioJSONDataRipperService.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 public class OntarioEnergy {
 
     private String timeOfReading;
