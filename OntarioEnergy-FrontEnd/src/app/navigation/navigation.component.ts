@@ -24,11 +24,15 @@ export class NavigationComponent implements OnInit {
   }
 
   downloadCsv() {
-    this._ontarioService.downloadCsv().subscribe({
-      next: (file) => {
-        var downloadFileURL = URL.createObjectURL(file);
-        window.open(downloadFileURL);
-      }
-    })
+    
+    window.location.href='http://localhost:8092/api/ontario-energy/export';
+    // this._ontarioService.downloadCsv().subscribe({
+    //   next: (file) => {
+    //     console.log("test");
+    //     var downloadFileURL = URL.createObjectURL(file);
+    //     window.location.href='http://localhost:8092/api/ontario-energy/export';
+    //     window.open(downloadFileURL);
+    //   }
+    // })
   }
 }
