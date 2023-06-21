@@ -1,6 +1,10 @@
 package miu.edu.PresentationService.domain;
 
+import java.util.Date;
+
 public class OntarioEnergy {
+
+    private Date date;
 
     private String timeOfReading;
     private String powerGenerated;
@@ -47,6 +51,38 @@ public class OntarioEnergy {
         this.imports = imports;
         this.exports = exports;
         this.netImportExports = netImportExports;
+    }
+
+    public OntarioEnergy(Date date, String timeOfReading, String powerGenerated, String ontarioDemand, String totalCo2e, String co2eIntensity, String nuclearPercentage, String nuclearOutput, String hydroPercentage, String hydroOutput, String gasPercentage, String gasOutput, String windPercentage, String windOutput, String biofuelPercentage, String biofuelOutput, String solarPercentage, String solarOutput, String imports, String exports, String netImportExports) {
+        this.date = date;
+        this.timeOfReading = timeOfReading;
+        this.powerGenerated = powerGenerated;
+        this.ontarioDemand = ontarioDemand;
+        this.totalCo2e = totalCo2e;
+        this.co2eIntensity = co2eIntensity;
+        this.nuclearPercentage = nuclearPercentage;
+        this.nuclearOutput = nuclearOutput;
+        this.hydroPercentage = hydroPercentage;
+        this.hydroOutput = hydroOutput;
+        this.gasPercentage = gasPercentage;
+        this.gasOutput = gasOutput;
+        this.windPercentage = windPercentage;
+        this.windOutput = windOutput;
+        this.biofuelPercentage = biofuelPercentage;
+        this.biofuelOutput = biofuelOutput;
+        this.solarPercentage = solarPercentage;
+        this.solarOutput = solarOutput;
+        this.imports = imports;
+        this.exports = exports;
+        this.netImportExports = netImportExports;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getTimeOfReading() {

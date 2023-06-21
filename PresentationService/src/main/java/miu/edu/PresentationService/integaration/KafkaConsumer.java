@@ -2,7 +2,6 @@ package miu.edu.PresentationService.integaration;
 
 import miu.edu.PresentationService.dao.OntarioEnergyRepository;
 import miu.edu.PresentationService.domain.OntarioEnergy;
-import miu.edu.PresentationService.domain.OntarioEnergyData;
 import miu.edu.PresentationService.service.ConvertStringToObject;
 import miu.edu.PresentationService.service.OntarioEnergyAdapter;
 import miu.edu.PresentationService.service.OntarioEnergyDTO;
@@ -18,9 +17,8 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,12 +69,10 @@ public class KafkaConsumer {
         OntarioEnergyDTO ontarioWeatherDTO = ConvertStringToObject.covertFromJsonToOntario(message);
         OntarioEnergy ontarioWeather = OntarioEnergyAdapter.convertFromDtoToOntarioWeather(ontarioWeatherDTO);
 
+//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String currentDateTime = dateFormatter.format(new Date());
+        ontarioWeather.setDate(new Date());
 
-//        LocalDateTime currentDateTime = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        String formattedDateTime = currentDateTime.format(formatter);
-
-        OntarioEnergyData data = new OntarioEnergyData(new Date(), ontarioWeather);
-        repository.save(data);
+        repository.save(ontarioWeather);
     }
 }

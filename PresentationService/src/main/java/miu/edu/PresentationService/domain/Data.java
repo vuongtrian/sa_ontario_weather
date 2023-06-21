@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Data {
-    private Collection<OntarioEnergyData> data = new ArrayList<>();
+    private Collection<OntarioEnergy> data = new ArrayList<>();
 
     public Data() {
     }
 
-    public Data(Collection<OntarioEnergyData> data) {
+    public Data(Collection<OntarioEnergy> data) {
         this.data = data;
     }
 
-    public Collection<OntarioEnergyData> getData() {
+    public Collection<OntarioEnergy> getData() {
         return data;
     }
 
-    public void setData(Collection<OntarioEnergyData> data) {
+    public void setData(Collection<OntarioEnergy> data) {
         this.data = data;
     }
 

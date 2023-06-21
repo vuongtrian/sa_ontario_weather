@@ -1,11 +1,11 @@
 package miu.edu.PresentationService.service;
 
-import miu.edu.PresentationService.domain.OntarioEnergyData;
+import miu.edu.PresentationService.domain.OntarioEnergy;
 
 import java.util.List;
 
 public interface IOntarioEnergyService {
-    List<OntarioEnergyData> findAll();
+    List<OntarioEnergy> findAll();
 
-    List<OntarioEnergyData> findTop2();
+    List<OntarioEnergy> findTop2();
 }

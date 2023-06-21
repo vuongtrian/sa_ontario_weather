@@ -2,7 +2,7 @@ package miu.edu.PresentationService.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import miu.edu.PresentationService.domain.Data;
-import miu.edu.PresentationService.domain.OntarioEnergyData;
+import miu.edu.PresentationService.domain.OntarioEnergy;
 import miu.edu.PresentationService.service.IOntarioEnergyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,6 @@ import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 public class OntarioEnergyController {
@@ -22,13 +21,13 @@ public class OntarioEnergyController {
     @Autowired
     private IOntarioEnergyService service;
 
-//    @GetMapping("/api/ontario-energy")
-//    public ResponseEntity<?> findAll () {
-//        Data data = new Data(service.findTop2());
-//        return new ResponseEntity<Data>(data, HttpStatus.OK);
-//    }
+    @GetMapping("/api/ontario-energy")
+    public ResponseEntity<?> findAll () {
+        Data data = new Data(service.findTop2());
+        return new ResponseEntity<Data>(data, HttpStatus.OK);
+    }
 
-    @GetMapping("/export")
+    @GetMapping("/api/export")
     public void exportToCSV (HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         String fileName = "ontario-energy.csv";
@@ -44,16 +43,16 @@ public class OntarioEnergyController {
                 "Nuclear Output", "Hydro Percentage", "Hydro Output", "Gas Percentage",
                 "Gas Output", "Wind Percentage", "Wind Output", "Biofuel Percentage",
                 "Biofuel Output", "Solar Percentage", "Solar Output", "Imports", "Exports", "Net Import Exports"};
-        String[] nameMapping = {"date", "ontarioEnergy.timeOfReading", "ontarioEnergy.powerGenerated",
-                "ontarioEnergy.ontarioDemand", "ontarioEnergy.totalCo2e", "ontarioEnergy.co2eIntensity",
-                "ontarioEnergy.nuclearPercentage", "ontarioEnergy.nuclearOutput", "ontarioEnergy.hydroPercentage",
-                "ontarioEnergy.hydroOutput", "ontarioEnergy.gasPercentage", "ontarioEnergy.gasOutput",
-                "ontarioEnergy.windPercentage", "ontarioEnergy.windOutput", "ontarioEnergy.biofuelPercentage",
-                "ontarioEnergy.biofuelOutput", "ontarioEnergy.solarPercentage", "ontarioEnergy.solarOutput",
-                "ontarioEnergy.imports", "ontarioEnergy.exports", "ontarioEnergy.netImportExports"};
+        String[] nameMapping = {"date", "timeOfReading", "powerGenerated",
+                "ontarioDemand", "totalCo2e", "co2eIntensity",
+                "nuclearPercentage", "nuclearOutput", "hydroPercentage",
+                "hydroOutput", "gasPercentage", "gasOutput",
+                "windPercentage", "windOutput", "biofuelPercentage",
+                "biofuelOutput", "solarPercentage", "solarOutput",
+                "imports", "exports", "netImportExports"};
 
         csvWriter.writeHeader(csvHeader);
-        for (OntarioEnergyData d: data.getData()) {
+        for (OntarioEnergy d: data.getData()) {
             csvWriter.write(d, nameMapping);
         }
         csvWriter.close();
