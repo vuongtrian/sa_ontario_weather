@@ -15,8 +15,8 @@ public class RealTimeDataInputService {
     @Autowired
     private KafkaProducer kafkaProducer;
 
-//    @Scheduled(fixedDelay = 10000)
-    @Scheduled(cron = "@hourly")
+    @Scheduled(fixedDelay = 10000)
+//    @Scheduled(cron = "@hourly")
     public void getData() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://live.gridwatch.ca/WebServices/GridWatchWebApp.asmx/GetHomeViewData_v2";
