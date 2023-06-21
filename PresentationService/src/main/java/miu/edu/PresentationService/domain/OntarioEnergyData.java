@@ -8,14 +8,14 @@ import java.util.Date;
 public class OntarioEnergyData {
 
     private Date date;
-    private OntarioEnergy ontarioWeather;
+    private OntarioEnergy ontarioEnergy;
 
     public OntarioEnergyData() {
     }
 
     public OntarioEnergyData(Date date, OntarioEnergy ontarioWeather) {
         this.date = date;
-        this.ontarioWeather = ontarioWeather;
+        this.ontarioEnergy = ontarioWeather;
     }
 
     public Date getDate() {
@@ -26,19 +26,19 @@ public class OntarioEnergyData {
         this.date = date;
     }
 
-    public OntarioEnergy getOntarioWeather() {
-        return ontarioWeather;
+    public OntarioEnergy getOntarioEnergy() {
+        return ontarioEnergy;
     }
 
-    public void setOntarioWeather(OntarioEnergy ontarioWeather) {
-        this.ontarioWeather = ontarioWeather;
+    public void setOntarioEnergy(OntarioEnergy ontarioEnergy) {
+        this.ontarioEnergy = ontarioEnergy;
     }
 
     @Override
     public String toString() {
         return "OntarioWeatherData{" +
                 "date=" + date +
-                ", ontarioWeather=" + ontarioWeather +
+                ", ontarioWeather=" + ontarioEnergy +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package miu.edu.PresentationService.service;
 import miu.edu.PresentationService.dao.OntarioEnergyRepository;
 import miu.edu.PresentationService.domain.OntarioEnergyData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,6 @@ public class OntarioEnergyServiceImpl implements IOntarioEnergyService {
 
     @Override
     public List<OntarioEnergyData> findTop2() {
-        Sort sort = Sort.by(Sort.Direction.ASC, "date");
-        return repository.findTop2By(sort);
+        return repository.findTop2ByHour();
     }
 }
