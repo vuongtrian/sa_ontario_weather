@@ -68,11 +68,7 @@ public class KafkaConsumer {
         System.out.println("Received Message from ripper service: " + message);
         OntarioEnergyDTO ontarioWeatherDTO = ConvertStringToObject.covertFromJsonToOntario(message);
         OntarioEnergy ontarioWeather = OntarioEnergyAdapter.convertFromDtoToOntarioWeather(ontarioWeatherDTO);
-
-//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String currentDateTime = dateFormatter.format(new Date());
         ontarioWeather.setDate(new Date());
-
         repository.save(ontarioWeather);
     }
 }
